@@ -1,0 +1,23 @@
+{
+  "contributors": [
+    {
+      "name": "Pierre Pompidor",
+      "email": "pompidor@lirmm.fr"
+    }
+  ],
+  "description": "Serveur VentesEnLigne",
+  "engines": {
+    "node": ">=8.10.0"
+  },
+  "scripts": {
+    "start": "node ServeurVentesEnLigne.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "circular-json": "^0.5.9",
+    "cors": ">=2.8.5",
+    "express": ">=4.16.4",
+    "mongodb": "^3.3.2",
+    "mongodb-core": "^3.2.7"
+  }
+}
