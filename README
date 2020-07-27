@@ -19,11 +19,10 @@ Serveurs Node.js OnlineSalesServer.js et OnlineSalesHttpsServer.js :
   node OnlineSalesHttpsServer.js &
 
 Application Angular :
+npm install -g @angular/cli
 - déplacez-vous dans le dossier ONLINESALES correspondant à l'application Angular ;
 - installez localement les modules Node.js nécessaires à votre application : npm install
 - construire l'application et la faire afficher dans votre navigateur : ng serve -o --aot
 - pour tester une authentification, prenez les identifiants de Claire DELUNE :
   login : delune@lirmm.fr
   password : sideree
-
-

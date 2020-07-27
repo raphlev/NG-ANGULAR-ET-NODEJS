@@ -1,10 +1,5 @@
 {
-  "contributors": [
-    {
-      "name": "Pierre Pompidor",
-      "email": "pompidor@lirmm.fr"
-    }
-  ],
+  "name": "onlinesalesServ",
   "description": "Serveur VentesEnLigne",
   "engines": {
     "node": ">=8.10.0"
