@@ -1,0 +1,100 @@
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import * as d3 from 'd3';
+
+import { ChartService } from '../chart.service';
+
+
+@Component({
+  selector: 'app-chart',
+  templateUrl: 'chart.component.html',
+  styleUrls: ['chart.component.css']
+})
+export class ChartComponent implements OnInit {
+  private data: Array<any> = [];
+  private svg: any;
+  private places: Array<string>;
+
+  private barWidth :number = 30;
+  private margin :number = 20;
+  private xAxisWidth :number;
+  private yAxisHeight :number;
+  private xScale: any;
+  private yScale: any;
+  private colors: Array<string> = ['red', 'blue', 'yellow', 'green'];
+
+  constructor(private chartService: ChartService) {}
+  
+  ngOnInit() {
+     this.svg = d3.select("body").append('svg');
+    
+     this.chartService.getPlaces()
+                      .subscribe(res => this.places = res,
+                                 err => console.error(err),
+                                 () => console.log('getPlaces() done'));
+  }
+
+  displaySalesOfAPlace($event) {
+    let selectElement = $event.target;
+    let optionIndex = selectElement.selectedIndex;
+    let place = selectElement.options[optionIndex].text;
+    console.log("Affichage des ventes de "+place);
+    this.chartService.getSalesDataOfaPlace(place)
+                     .subscribe(res => {let salesMax :number = 0;
+		                        this.data = [];
+                                        for (let product of res) {
+                                             this.data.push([product.name, product.sales]);
+					     if (product.sales > salesMax) salesMax = product.sales;
+					     this.places.push();
+					}
+					this.createAxis(this.data.length, salesMax);
+					this.createBars();
+                                },
+                                err => console.error(err),
+                                () => console.log('getSalesData() done'));
+  }
+
+  createAxis(nbProducts :number, salesMax :number) {
+
+    this.svg.selectAll('.axis').remove();
+
+    this.xAxisWidth = this.margin + (this.barWidth + this.margin)*nbProducts;
+    this.yAxisHeight = salesMax + this.margin;
+
+    this.svg.attr('width', this.margin + this.xAxisWidth + this.margin)
+            .attr('height', this.margin + this.yAxisHeight + this.margin);
+
+    let xDomain = this.data.map(d => d[0]);
+    this.xScale = d3.scaleBand().padding(0.1).domain(xDomain).rangeRound([0, this.xAxisWidth]);
+    let yDomain = [0, salesMax];
+    this.yScale = d3.scaleLinear().domain(yDomain).range([this.yAxisHeight, 0]);
+ //   this.yScale = d3.scaleLinear().range([this.yAxisHeight, 0]);    
+
+    this.svg.append('g')
+      .attr('class', 'axis')
+      .attr('transform', `translate(0, ${this.yAxisHeight})`)
+      .call(d3.axisBottom(this.xScale));
+
+    this.svg.append('g')
+      .attr('class', 'axis')
+      .attr('transform', `translate($(this.margin), 0)`)
+      .call(d3.axisLeft(this.yScale));
+
+  }
+
+  createBars() {
+    this.svg.selectAll('.bar').remove();
+    
+    this.svg.selectAll('.bar').data(this.data)
+      .enter()
+      .append('rect')
+      .attr('class', 'bar')
+      .attr('x', (d, i) => this.margin + i*(this.margin+this.barWidth))
+      .attr('y', d => this.yAxisHeight - d[1] )
+      .attr('width', this.barWidth)
+      .attr('height', d => d[1])
+      .style('fill', (d, i) => this.colors[i%this.colors.length]);
+ 
+  }
+}
+
+

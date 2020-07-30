@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title> Carte Google Map</title>
+      <meta charset="utf-8" />
+      <style type="text/css">
+        html { height: 100%; }
+	body { height: 100% }
+      </style>
+
+      <script src="https://maps.googleapis.com/maps/api/js?key=<votreCLEF>&callback=initMap" async defer></script>
+
+      <script type="text/javascript">
+           function initMap() {
+              var latlng = new google.maps.LatLng(43.6111, 3.87667);
+              var myOptions = { zoom: 15,
+                                center: latlng,
+                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                              };
+              var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+              var latlng = new google.maps.LatLng(43.6111, 3.87667);
+              var marker = new google.maps.Marker({ position: latlng,
+                                                    map: map,
+                                                    title: "Préfecture de Montpellier !",
+                                                    draggable: true
+                                                  });
+           }
+      </script>
+   </head>
+   <body>
+         <div id="map_canvas" style="width:100%; height:100%"></div>
+   </body>
+</html>

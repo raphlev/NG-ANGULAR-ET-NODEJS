@@ -1,0 +1,13 @@
+Pour mettre en oeuvre les différentes applications ANGULAR proposées en exemple, vous devez :
+- si ce n'est déjà fait, installer globalement Node.js ;
+- vous déplacer dans le dossier correspondant à l'application ;
+- installer localement les modules Node.js nécessaires à votre application dont les spécifications sont indiquées dans les fichiers package.json :
+  pour cela exécutez la commande : npm install
+- exécuter le serveur de données (s'il y en a un à exécuter) : node (ou nodejs) <nomduserveur.js>
+- construire l'application et la faire afficher dans votre navigateur : ng serve -o
+
+Pour l'exemple GOOGLEMAP,
+- avant de charger le code carteGoogleMap.html, vous devez générer une clef pour utiliser l'API Google Map et la copier dans ce code (voir le paragraphe consacré à ce sujet) ;
+- avant de construire l'application Angular, vous devez également copier cette clef dans le code src/index.html.
+
+Idem pour l'exemple GOOGLEMAP_CHART (copiez la clef dans src/index.html).
