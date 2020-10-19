@@ -466,9 +466,9 @@ MongoClient.connect(url, { useNewUrlParser: true }, function (err, client) {
         password
     );
     //stringifyCircular(db.collection("Users"));
-    let usersAll = db.collection("Users");
-    console.log(CircularJSON.stringify(usersAll));
-    db.collection("users")
+    //let usersAll = db.collection("Users");
+    //console.log(CircularJSON.stringify(usersAll));
+    db.collection("Users")
       .find({
         email: login,
         password: password,

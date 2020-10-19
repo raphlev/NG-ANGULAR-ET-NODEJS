@@ -5,7 +5,11 @@ const MongoClient = require("mongodb").MongoClient;
 
 //let CONNECTION_URL;
 //CONNECTION_URL = "mongodb+srv://test:test@cluster0-hapla.gcp.mongodb.net/test";
-let url = "mongodb+srv://test:test@cluster0-hapla.gcp.mongodb.net/test?retryWrites=true&w=majority";
+//let url = "mongodb+srv://test:test@cluster0-hapla.gcp.mongodb.net/test?retryWrites=true&w=majority";
+
+let url =
+  "mongodb+srv://learning:learning@nodedeploy-ehxpw.mongodb.net/OnlineSales?retryWrites=true&w=majority";
+
 
 const DATABASE_NAME = "OnlineSales";
 
@@ -51,4 +55,26 @@ app.get("/user", (request, response) => {
         }
         response.send(result);
     });
+});
+
+app.get("/product", (request, response) => {
+  console.log("get product from Database");
+  collection = database.collection("Products");
+  collection.find({}).toArray((error, result) => {
+    if (error) {
+      return response.status(500).send(error);
+    }
+    response.send(result);
+  });
+});
+
+app.get("/cart", (request, response) => {
+  console.log("get cart from Database");
+  collection = database.collection("Carts");
+  collection.find({}).toArray((error, result) => {
+    if (error) {
+      return response.status(500).send(error);
+    }
+    response.send(result);
+  });
 });
