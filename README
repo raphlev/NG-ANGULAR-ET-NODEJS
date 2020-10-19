@@ -26,3 +26,8 @@ npm install -g @angular/cli
 - pour tester une authentification, prenez les identifiants de Claire DELUNE :
   login : delune@lirmm.fr
   password : sideree
+
+- Issue Errors: Data path “.builders['app-shell']” should have required property 'class'
+https://stackoverflow.com/questions/56393158/errors-data-path-buildersapp-shell-should-have-required-property-class
+Executer: 
+---> npm i --global @angular/cli@latest
